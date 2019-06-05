@@ -3,7 +3,6 @@ namespace App;
 
 class Router
 {
-
     private $router;
 
     private $viewPath;
@@ -23,7 +22,9 @@ class Router
 
     public function run(): void
     {
+        
         $match = $this->router->match();
+        $router=$this;
         ob_start();
         if (is_array($match)) {
             $params = $match['params'];
@@ -40,5 +41,10 @@ class Router
     private function pathToFile(string $file): string
     {
         return $this->viewPath . DIRECTORY_SEPARATOR . $file . '.php';
+    }
+
+    public function url(string $name, array $params =[]): string
+    {   
+        return $this->router->generate($name, $params);
     }
 }

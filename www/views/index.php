@@ -1,7 +1,7 @@
 <?php
 
 use App\Model\Post;
-
+use App\Helpers\Text;
 
 $pdo = new PDO(
     "mysql:host=" .
@@ -32,7 +32,7 @@ $statement = $pdo->query("SELECT * FROM post
                     LIMIT {$perPage} 
                     OFFSET {$offset}");
 $statement->setFetchMode(PDO::FETCH_CLASS, Post::class);
-// Permet de récupérer une classe plutôt qu'un objet
+// Permet de récupérer une classe plutôt qu'un objet dans chaque post du tableau posts
 $posts= $statement->fetchAll();
 
 $title = 'Mon Super MEGA blog';
@@ -49,11 +49,12 @@ $title = 'Mon Super MEGA blog';
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title"><?= $post->getName(); ?></h5>
-                    <p class="card-text"><?= substr($post->getContent(), 0, 100); ?>...</p>
+                    <p class="card-text"><?= Text::excerpt($post->getContent(), 150); ?>...</p>
                 </div>
-                <a href="/article/<?= $post->getSlug(); ?>-<?= $post->getId(); ?>" class="text-center pb-2">lire plus</a>
+                
+                <a href="<?= $router->url('post',['id' => $post->getId(), 'slug'=>$post->getSlug()]); ?>" class="text-center pb-2">Lire plus</a>
                 <div class="card-footer text-muted">
-                    <?= $post->getCreatedAt(); ?>
+                    <?= ($post->getCreatedAt())->format('d/m/Y H:i'); ?>
                 </div>
             </div>
         </article>
