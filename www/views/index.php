@@ -2,14 +2,9 @@
 
 use App\Model\Post;
 use App\Helpers\Text;
+use App\Model\Connexion;
 
-$pdo = new PDO(
-    "mysql:host=" .
-        getenv('MYSQL_HOST') .
-        ";dbname=" . getenv('MYSQL_DATABASE'),
-        getenv('MYSQL_USER'),
-        getenv('MYSQL_PASSWORD')
-);
+$pdo = Connexion::connectPDO();
 
 $nbpost = $pdo->query('SELECT count(id) FROM post')->fetch()[0];
 $perPage = 12;

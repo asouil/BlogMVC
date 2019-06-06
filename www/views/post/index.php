@@ -1,4 +1,5 @@
 <?php
+use App\Model\{Post, Connexion, Category};
 
 /**
  * fichier qui génère la vue pour l'url /article/[i:id]
@@ -10,33 +11,50 @@ $slug = $params['slug'];
 $title = "article " . $slug;
 ?>
 
-
-
 <?php 
-$pdo = new PDO("mysql:host=".getenv('MYSQL_HOST').";dbname=".getenv('MYSQL_DATABASE'),
-    getenv('MYSQL_USER'), getenv('MYSQL_PASSWORD'));
+$pdo = Connexion::connectPDO();
+
 $sql='SELECT * FROM `post` WHERE `id` LIKE '.$id;
 $statement=($pdo->prepare($sql));
 $statement->execute(); 
-//$statement->setFetchMode(PDO::FETCH_CLASS, App\Model\Post::class);
+$statement->setFetchMode(PDO::FETCH_CLASS, Post::class);
+/** @var Post|false **/
 $article= $statement->fetch();//
-    $titre= $article['name'];
-    $contenu= nl2br(htmlspecialchars($article['content']));
-    $timeof= (new DateTime($article['created_at']))->format('d/m/Y h:i');
+
+if(!$article){
+    //on lève une exception
+    throw new Exception ('Aucun article ne correspond à cet id!');
+}
+if($article->getSlug()!= $slug){
+    $url= $router->url('post', ['id' => $id, 'slug'=> $article->getSlug()]);
+    http_response_code(301);
+    header('Location: '.$url);
+    exit();
+}
+$query= $pdo->prepare('
+    SELECT c.id, c.slug, c.name
+    FROM post_category pc JOIN category c
+    ON pc.category_id=c.id
+    WHERE pc.post_id= :id ');
+$query->execute([":id" => $article->getId()]);
+$query->setFetchMode(PDO::FETCH_CLASS, Category::class);
+$cats=$query->fetchAll();
+
+foreach($cats as $cat){
+    echo '<li>'.$cat->getName().'</li>';
+}
+
+    $titre= $article->getName();
+    
+    $contenu= nl2br(htmlspecialchars($article->getContent()));
+    $timeof= $article->getCreatedAt()->format('d/m/Y h:i');
 ?>
 
-<html>
-<head>
-    <title><?= $titre; ?></title>
-</head>
-<body>
     <h1><?= $titre; ?></h1>
     <hr>
     <article><?= $contenu; ?></article>
     <hr>
     <span><?= $timeof; ?></span>
 
-</body>
 
-</html>
 
