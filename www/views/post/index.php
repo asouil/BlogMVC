@@ -1,60 +1,55 @@
 <?php
-use App\Model\{Post, Connexion, Category};
 
-/**
- * fichier qui génère la vue pour l'url /article/[i:id]
- * 
- */
+use App\Model\Post;
+use App\Helpers\Text;
+use App\Model\Connexion;
 
-$id = $params['id'];
-$slug = $params['slug'];
-$title = "article " . $slug;
-?>
 
-<?php 
 $pdo = Connexion::connectPDO();
 
-$sql='SELECT * FROM `post` WHERE `id` LIKE '.$id;
-$statement=($pdo->prepare($sql));
-$statement->execute(); 
-$statement->setFetchMode(PDO::FETCH_CLASS, Post::class);
-/** @var Post|false **/
-$article= $statement->fetch();//
+$nbpost = $pdo->query('SELECT count(id) FROM post')->fetch()[0];
+$perPage = 12;
+$nbPage = ceil($nbpost / $perPage);
 
-if(!$article){
-    //on lève une exception
-    throw new Exception ('Aucun article ne correspond à cet id!');
-}
-if($article->getSlug()!= $slug){
-    $url= $router->url('post', ['id' => $id, 'slug'=> $article->getSlug()]);
-    http_response_code(301);
-    header('Location: '.$url);
+if ((int)$_GET["page"] > $nbPage) {
+    header('location: /');
     exit();
 }
-$query= $pdo->prepare('
-    SELECT c.id, c.slug, c.name
-    FROM post_category pc JOIN category c
-    ON pc.category_id=c.id
-    WHERE pc.post_id= :id ');
-$query->execute([":id" => $article->getId()]);
-$query->setFetchMode(PDO::FETCH_CLASS, Category::class);
-$cats=$query->fetchAll();
 
-foreach($cats as $cat){
-    echo '<li>'.$cat->getName().'</li>';
+if (isset($_GET["page"])) {
+    $currentpage = (int)$_GET["page"];
+} else {
+    $currentpage = 1;
 }
+$offset = ($currentpage - 1) * $perPage;
 
-    $titre= $article->getName();
-    
-    $contenu= nl2br(htmlspecialchars($article->getContent()));
-    $timeof= $article->getCreatedAt()->format('d/m/Y h:i');
+$statement = $pdo->query("SELECT * FROM post 
+                    ORDER BY id 
+                    LIMIT {$perPage} 
+                    OFFSET {$offset}");
+$statement->setFetchMode(PDO::FETCH_CLASS, Post::class);
+// Permet de récupérer une classe plutôt qu'un objet dans chaque post du tableau posts
+$posts= $statement->fetchAll();
+
+$title = 'Mon Super blog';
 ?>
 
-    <h1><?= $titre; ?></h1>
-    <hr>
-    <article><?= $contenu; ?></article>
-    <hr>
-    <span><?= $timeof; ?></span>
-
-
-
+<?php if (null !== $message) : ?>
+    <div class="alert-message">
+        <?= $message ?>
+    </div>
+<?php endif ?>
+<section class="row">
+    <?php foreach ($posts as $post) :
+        require 'card.php';
+    endforeach; ?>
+</section>
+<nav class="Page navigation">
+    <ul class="pagination justify-content-center">
+        <?php for ($i = 1; $i <= $nbPage; $i++) : ?>
+            <?php $class = $currentpage == $i ? " active" : ""; ?>
+            <?php $uri = $i == 1 ? "" : "?page=" . $i; ?>
+            <li class="page-item<?= $class ?>"><a class="page-link" href="/<?= $uri ?>"><?= $i ?></a></li>
+        <?php endfor ?>
+    </ul>
+</nav>

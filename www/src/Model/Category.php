@@ -9,6 +9,7 @@ class Category
     private $name;
     private $slug;
 
+
      /* Get the values of each properties */
 
     public function getId(){
