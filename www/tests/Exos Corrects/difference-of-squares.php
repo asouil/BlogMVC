@@ -6,7 +6,7 @@
 function squareOfSums($int)
 {
     $result=0;
-    for($i=0;$i<=$int;$i++){
+    for ($i=0; $i<=$int; $i++) {
         $result += $i;
     }
 
@@ -16,11 +16,13 @@ function squareOfSums($int)
 function sumOfSquares($int)
 {
     $result=0;
-    for($i=1;$i<=$int;$i++)
+    for ($i=1; $i<=$int; $i++) {
         $result+=$i**2;
+    }
     return $result;
 }
 
-function difference($int){
+function difference($int)
+{
     return squareOfSums($int)-sumOfSquares($int);
 }

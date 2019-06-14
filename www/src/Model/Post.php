@@ -2,7 +2,6 @@
 
 namespace App\Model;
 
-
 class Post
 {
     private $id;
@@ -13,23 +12,28 @@ class Post
 
     /* Get the values of each properties */
 
-    public function getId(){
+    public function getId()
+    {
         return $this->id;
     }
 
-    public function getName(){
+    public function getName()
+    {
         return $this->name;
     }
 
-    public function getSlug(){
+    public function getSlug()
+    {
         return $this->slug;
     }
 
-    public function getContent(){
+    public function getContent()
+    {
         return $this->content;
     }
 
-    public function getCreatedAt(){
+    public function getCreatedAt()
+    {
         $date= new \DateTime($this->created_at);
         return $date;
     }

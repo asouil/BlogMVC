@@ -15,7 +15,6 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
@@ -44,6 +43,7 @@
         </header>
         <?= $content ?>
     </section>
+    </body>
     <footer class="footer bg-dark fixed-bottom py-1">
         <div class="text-center">
         <?php
@@ -55,14 +55,12 @@
             ?>
             <span class="text-white">by julien <?= $debug; ?></span>
         </div>
-</footer>
-
-
-<script
-  src="https://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"></script>
-<script src='http://localhost/script.js'></script> 
+    </footer>
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+    <script src='http://localhost/script.js'></script> 
 
 </body>
 

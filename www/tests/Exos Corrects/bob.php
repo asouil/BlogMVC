@@ -5,7 +5,7 @@
 //
 class Bob
 {
-   /**
+    /**
     * Respond to an input string
     *
     * @param string $str
@@ -13,12 +13,18 @@ class Bob
     */
     public function respondTo($str)
     {
-        //en majuscules (l'expression régulère doit être encadrée)
-        if(ctype_upper($str)||(strtoupper($str)===$str && preg_match('/[A-Z]/', $str))) return "Whoa, chill out!";
+        //en majuscules (l'expression régulière doit être encadrée)
+        if (ctype_upper($str)||(strtoupper($str)===$str && preg_match('/[A-Z]/', $str))) {
+            return "Whoa, chill out!";
+        }
         //si une question
-        if(substr(trim($str),-1)==='?') return 'Sure.';
+        if (substr(trim($str), -1)==='?') {
+            return 'Sure.';
+        }
         //si chaîne vide
-        if(!trim($str)) return 'Fine. Be that way!';
+        if (!trim($str)) {
+            return 'Fine. Be that way!';
+        }
         //toute autre
         return 'Whatever.';
     }

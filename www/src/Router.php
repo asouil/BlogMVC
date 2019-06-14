@@ -43,8 +43,8 @@ class Router
         return $this->viewPath . DIRECTORY_SEPARATOR . $file . '.php';
     }
 
-    public function url(string $name, array $params =[]): string
-    {   
+    public function url(string $name, array $params = []): string
+    {
         return $this->router->generate($name, $params);
     }
 }

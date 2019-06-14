@@ -8,6 +8,4 @@ function from(\DateTime $from)
     //$date=time('0031-08-06 01:46:40');
     $from=(clone $from)->modify((10**9).' sec');
     return $from;
-    
-
 }

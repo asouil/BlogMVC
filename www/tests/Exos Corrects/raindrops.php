@@ -6,10 +6,17 @@
 function raindrops($num)
 {
     $nom='';
-    if($num%3==0) $nom.='Pling';
-    if($num%5==0) $nom.='Plang';
-    if($num%7==0) $nom.='Plong';
-    if(!$nom) $nom.=$num;
+    if ($num%3==0) {
+        $nom.='Pling';
+    }
+    if ($num%5==0) {
+        $nom.='Plang';
+    }
+    if ($num%7==0) {
+        $nom.='Plong';
+    }
+    if (!$nom) {
+        $nom.=$num;
+    }
     return $nom;
-    
 }

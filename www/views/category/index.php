@@ -15,7 +15,6 @@ $state=$pdo->query($sql);
 $state->setFetchMode(PDO::FETCH_CLASS, Category::class);
 $categories=$state->fetchAll();
 
-
 foreach($categories as $category): ?>
 
     <article class="col-12 col-md-3 mb-4 d-flex align-items-stretch">
@@ -23,4 +22,3 @@ foreach($categories as $category): ?>
     </article>
     
 <?php endforeach; ?>
-

@@ -1,6 +1,7 @@
 <?php
 
 use \PHPUnit\Framework\TestCase;
+
 require "hello-world.php";
 
 class HelloWorldTest extends TestCase
@@ -10,17 +11,18 @@ class HelloWorldTest extends TestCase
         $this->assertEquals('Hello, World!', helloworld());
     }
 
-    public function testSampleName(){
+    public function testSampleName()
+    {
         $this->assertEquals('Hello, Alice!', helloworld('Alice'));
     }
 
-    public function testSampleName2(){
+    public function testSampleName2()
+    {
         $this->assertEquals('Hello, Bob!', helloworld('bob'));
     }
 
-    public function testSampleName3(){
+    public function testSampleName3()
+    {
         $this->assertEquals('Hello, Pierre!', helloworld('PIERRE'));
     }
-
-
 }

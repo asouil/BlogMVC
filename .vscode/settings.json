@@ -1,0 +1,7 @@
+{
+    "phpunit.command": "docker exec -t blog",
+    "phpunit.php": "/var/www/vendor/bin/phpunit",
+    "phpunit.paths": {
+        "/home/user/SITE/blog/www": "/var/www"
+    }
+}

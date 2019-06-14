@@ -1,9 +1,9 @@
 <?php
 
 use App\Model\Post;
-use App\Helpers\Text;
 use App\Model\Connexion;
-
+use App\Model\Category;
+use App\Helpers\Text;
 
 $pdo = Connexion::connectPDO();
 
@@ -23,14 +23,13 @@ if (isset($_GET["page"])) {
 }
 $offset = ($currentpage - 1) * $perPage;
 
-$statement = $pdo->query("SELECT * FROM post 
+$statement = $pdo->query("SELECT * FROM post
                     ORDER BY id 
                     LIMIT {$perPage} 
                     OFFSET {$offset}");
 $statement->setFetchMode(PDO::FETCH_CLASS, Post::class);
 // Permet de récupérer une classe plutôt qu'un objet dans chaque post du tableau posts
 $posts= $statement->fetchAll();
-
 $title = 'Mon Super blog';
 ?>
 
@@ -41,6 +40,22 @@ $title = 'Mon Super blog';
 <?php endif ?>
 <section class="row">
     <?php foreach ($posts as $post) :
+        $postById[$post->getId()] = $post;
+        $query= $pdo->prepare('SELECT c.id, c.slug, c.name
+        FROM post_category pc JOIN category c
+        ON pc.category_id=c.id
+        WHERE pc.post_id= :id ');
+        $query->execute([":id" => $post->getId()]);
+        $query->setFetchMode(PDO::FETCH_CLASS, Category::class);
+        $cats=$query->fetchAll();
+/*$postById = [];
+foreach ($posts as $post) {
+    
+}
+foreach ($categories as $category) {
+    $postById[$category->post_id]->setCategories($category);
+}*/
+
         require 'card.php';
     endforeach; ?>
 </section>

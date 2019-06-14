@@ -2,7 +2,6 @@
 
 namespace App\Model;
 
-
 class Category
 {
     private $id;
@@ -12,15 +11,24 @@ class Category
 
      /* Get the values of each properties */
 
-    public function getId(){
+    public function getId()
+    {
         return $this->id;
     }
 
-    public function getName(){
+    public function getName()
+    {
         return $this->name;
     }
 
-    public function getSlug(){
+    public function getSlug()
+    {
         return $this->slug;
+    }
+
+    public function setCategory($category){
+        //if($category)
+        
+        return array_push($cats);
     }
 }

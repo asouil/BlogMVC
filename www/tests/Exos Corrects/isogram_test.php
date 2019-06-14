@@ -1,6 +1,7 @@
 <?php
 
 use \PHPUnit\Framework\TestCase;
+
 require "isogram.php";
 class IsogramTest extends TestCase
 {
@@ -30,7 +31,7 @@ class IsogramTest extends TestCase
         $this->assertTrue(isIsogram('Hjelmqvist-Gryb-Zock-Pfund-Wax'));
     }
     public function testWorksWithGermanLetters()
-    {   
+    {
         $this->assertTrue(isIsogram('Heizölrückstoßabdämpfung'));
     }
     public function testIgnoresSpaces()

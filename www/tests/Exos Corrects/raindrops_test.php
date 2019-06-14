@@ -1,6 +1,7 @@
 <?php
 
 use \PHPUnit\Framework\TestCase;
+
 require "raindrops.php";
 
 class RaindropsTest extends TestCase

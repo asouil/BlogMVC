@@ -1,5 +1,5 @@
 <?php
-define("MTS", microtime(true));
+//microtime(true);
 
 $basePath = dirname(__dir__) . DIRECTORY_SEPARATOR;
 
@@ -23,7 +23,7 @@ if ($numpage!==null) {
         http_response_code(301);
         header('location: ' . $uri);
         exit();
-    } 
+    }
 }
 
 $router = new App\Router($basePath . 'views');

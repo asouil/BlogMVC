@@ -28,31 +28,33 @@ if ($category->getSlug() !== $slug) {
     exit();
 }
 $title = 'categorie : ' . $category->getName();
-
 $url= $router->url('category', ['id' => $id, 'slug' => $slug]);
 
 $paginatedQuery = new PaginatedQuery(
     "SELECT count(category_id) FROM post_category WHERE category_id = {$category->getId()}", 
     "SELECT p.* FROM post p JOIN post_category pc ON pc.post_id = p.id WHERE pc.category_id = {$category->getId()} ORDER BY created_at DESC",
     "App\Model\Post", $url, 12);
-
 $posts= $paginatedQuery->getItems();
-
 ?>
 
 
 <section class="row">
     <?php /** @var Category::class $post */
     foreach ($posts as $post) {
+        $query= $pdo->prepare('SELECT c.id, c.slug, c.name
+        FROM post_category pc JOIN category c
+        ON pc.category_id=c.id
+        WHERE pc.post_id= :id ');
+        $query->execute([":id" => $post->getId()]);
+        $query->setFetchMode(PDO::FETCH_CLASS, Category::class);
+        $cats=$query->fetchAll();
         require dirname(__dir__) . '/post/card.php';
-
     }
     ?>
 </section>
 
 <nav class="Page navigation">
     <ul class="pagination justify-content-center">
-
         <?php 
         $uri = $router->url("category", ["id" => $category->getId(), "slug" => $category->getSlug()]);
         $navhtml=$paginatedQuery->getNavHTML(); 

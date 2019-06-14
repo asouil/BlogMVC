@@ -1,6 +1,6 @@
 <?php
-use \PHPUnit\Framework\TestCase;
 require_once "difference-of-squares.php";
+use \PHPUnit\Framework\TestCase;
 
 class SquaresTest extends TestCase
 {
