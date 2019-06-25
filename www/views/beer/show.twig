@@ -1,0 +1,16 @@
+{% extends "layout/default.twig" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="text-muted text-center pb-5 mb-5">
+    {{ beer() }} <br />
+
+    {% endfor %}
+</div>
+<p class="mx-4 text-justify">{{ beer.content }}</p>
+
+</div>
+</div>
+{{ paginate | raw }}
+{% endblock %}

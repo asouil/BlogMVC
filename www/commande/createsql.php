@@ -1,6 +1,6 @@
 <?php
 require_once '/var/www/vendor/autoload.php';
-
+require_once 'donnees.php';
 $pdo = new PDO('mysql:host=blog.mysql;dbname=blog', 'userblog', 'blogpwd');
 
 //creation tables
@@ -21,14 +21,8 @@ $etape = $pdo->exec("CREATE TABLE category(
             PRIMARY KEY(id)
         )");
 echo "||";
-$etape = $pdo->exec("CREATE TABLE user(
-            id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-            username VARCHAR(255) NOT NULL,
-            password VARCHAR(255) NOT NULL,
-            PRIMARY KEY(id)
-        )");
 echo "||";
-$pdo->exec("CREATE TABLE post_category(
+$etape = $pdo->exec("CREATE TABLE post_category(
             post_id INT UNSIGNED NOT NULL,
             category_id INT UNSIGNED NOT NULL,
             PRIMARY KEY(post_id, category_id),
@@ -43,13 +37,43 @@ $pdo->exec("CREATE TABLE post_category(
                 ON DELETE CASCADE
                 ON UPDATE RESTRICT
         )");
-echo "||";
+echo "||&";
+$etape = $pdo->exec("CREATE TABLE beer(
+            id INT(11) NOT NULL AUTO_INCREMENT,
+            title varchar(255) NOT NULL,
+            img text NOT NULL,
+            content longtext NOT NULL,
+            price float NOT NULL,
+            PRIMARY KEY(id)
+            )");
+echo "|&|";
+$etape = $pdo->exec("CREATE TABLE orders(
+            id INT(11) NOT NULL AUTO_INCREMENT,
+            id_user INT(11) NOT NULL,
+            ids_product longtext NOT NULL,
+            priceTTC float NOT NULL,
+            PRIMARY KEY(id)
+            )");
+echo "|&&|";
+$etape = $pdo->exec("CREATE TABLE users(
+        id_user INT(11) NOT NULL AUTO_INCREMENT,
+        lastname varchar(255) NOT NULL,
+        firstname varchar(255) NOT NULL,
+        address varchar(255) NOT NULL,
+        zipCode varchar(255) NOT NULL,
+        city varchar(255) NOT NULL,
+        country varchar(255) NOT NULL,
+        phone varchar(255) NOT NULL,
+        mail varchar(255) NOT NULL,
+        password varchar(255) NOT NULL,
+        PRIMARY KEY(id_user)
+        )");
 
 //vidage table
 $pdo->exec('SET FOREIGN_KEY_CHECKS = 0');
 $pdo->exec('TRUNCATE TABLE post_category');
 $pdo->exec('TRUNCATE TABLE post');
-$pdo->exec('TRUNCATE TABLE user');
+$pdo->exec('TRUNCATE TABLE users');
 $pdo->exec('TRUNCATE TABLE category');
 $pdo->exec('SET FOREIGN_KEY_CHECKS = 1');
 echo "||||||||||||";
@@ -85,11 +109,18 @@ foreach ($posts as $post) {
         echo "|";
     }
 }
-
-$password = password_hash('admin', PASSWORD_BCRYPT);
 echo "||";
+$statement = $pdo->prepare("INSERT INTO beer (title, img, content, price)
+VALUES (:title, :img, :content, :price)");
 
-$pdo->exec("INSERT INTO user SET
-        username='admin',
-        password='{$password}'");
-echo "||]";
+foreach ($beerArray as $value) {
+        $statement->execute([
+        ':title'   => $value[0],
+        ':img'     => $value[1],
+        ':content' => $value[2],
+        ':price'   => $value[3]
+    ]);
+}
+    echo "||]
+    ";
+

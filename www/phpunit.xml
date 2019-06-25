@@ -1,5 +1,14 @@
-<phpunit color="true" cacheResult="false">
-    <testsuite name="Framework">
-        <directory>tests</directory>   
-    </testsuite>
+<phpunit colors="true" cacheResult="false">
+    <testsuites>
+        <testsuite name="Framework">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist>
+            <directory>
+                src
+            </directory>
+        </whitelist>
+    </filter>
 </phpunit>
