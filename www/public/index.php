@@ -8,10 +8,11 @@ $app->setStartTime();
 $app::load();
 
 $app->getRouter($basePath)
-    ->get('/', 'Beer#all', 'home')
-    ->get('/Blog', 'Post#all', 'blog')
+    ->get('/',  'Beer#all', 'beer')
+    ->get('/Blog', 'Post#all', 'home')
     ->get('/categories', 'Category#all', 'categories')
     ->get('/category/[*:slug]-[i:id]', 'Category#show', 'category')
     ->get('/article/[*:slug]-[i:id]', 'Post#show', 'post')
     ->get('/test', 'Twig#index', 'test')
+    ->get('/order', 'order#all', 'commande')
     ->run();

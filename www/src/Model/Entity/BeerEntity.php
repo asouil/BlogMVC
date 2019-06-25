@@ -24,9 +24,16 @@ class BeerEntity extends Entity
     {
         return $this->id;
     }
+    /**
+     * Get the value of img
+     */
+    public function getImg()
+    {
+        return $this->img;
+    }
 
     /**
-     * Get the value of name
+     * Get the value of namtitlee
      */
     public function getTitle()
     {
@@ -42,11 +49,13 @@ class BeerEntity extends Entity
     }
 
     /**
-     * Get the value of created_at
+     * Get the price
      */
     public function getPrice()
     {
-        return new $this->price;
+        $price= $this->price;
+        $price=number_format($price, 2, ',','.');
+        return $price." €";
     }
 
     public function getExcerpt(int $length): string
@@ -59,8 +68,8 @@ class BeerEntity extends Entity
         return \App\App::getInstance()
             ->getRouter()
             ->url('beer', [
-                "title" => $this->getTitle(),
-                "content" => getExcerpt($this->getContent(), 15)
+                "id" => $this->getId(),
+                "title" => $this->getTitle()
             ]);
     }
 }

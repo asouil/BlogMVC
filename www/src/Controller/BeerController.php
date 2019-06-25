@@ -9,61 +9,63 @@ class BeerController extends Controller
 
     public function __construct()
     {
-        $this->loadModel('category');
-        $this->loadModel('post');
+        $this->loadModel('beer');
     }
     public function all()
     {
 
         $paginatedQuery = new PaginatedQueryAppController(
-            $this->category,
-            $this->generateUrl('categories')
+            $this->beer,
+            $this->generateUrl('beer')
         );
 
-        $categories = $paginatedQuery->getItems();
-        $title = "Catégories";
-
+        $beers = $paginatedQuery->getItems();
+        $title = "Les Bières";
+        
         $this->render(
-            "category/all",
+            "beer/all",
             [
                 "title" => $title,
-                "categories" => $categories,
+                "beers" => $beers,
                 "paginate" => $paginatedQuery->getNavHTML()
             ]
         );
     }
 
-    public function show(string $slug, int $id)
+    public function show(string $title, int $id)
     {
-        $category = $this->category->find($id);
 
-        if (!$category) {
+        $beer = $this->beer->find($id);
+        
+        if (!$beer) {
             throw new Exception('Aucune categorie ne correspond à cet ID');
         }
 
-        if ($category->getSlug() !== $slug) {
-            $url = $this->generateUrl('category', ['id' => $id, 'slug' => $category->getSlug()]);
+        if ($beer->getTitle() !== $title) {
+            $url = $this->generateUrl('beer', ['id' => $id, 'title' => $beer->getTitle()]);
             http_response_code(301);
             header('Location: ' . $url);
             exit();
         }
 
-        $title = 'categorie : ' . $category->getName();
+        $title = 'Bière : ' . $beer->getTitle();
 
-        $uri = $this->generateUrl("category", ["id" => $category->getId(), "slug" => $category->getSlug()]);
+        $uri = $this->generateUrl("beer", ["id" => $beer->getId(), "title" => $beer->getTitle()]);
 
         $paginatedQuery = new PaginatedQueryAppController(
-            $this->post,
+            $this->beer,
             $uri
         );
 
-        $postById = $paginatedQuery->getItemsInId($id);
+        $beerById = $paginatedQuery->getItemsInId($id);
 
         $this->render(
-            "category/show",
-            [
+            "beer/show",
+            [   
                 "title" => $title,
-                "posts" => $postById,
+                "img" =>$img,
+                "content" => $content,
+                "price" => $price, 
                 "paginate" => $paginatedQuery->getNavHTML()
             ]
         );

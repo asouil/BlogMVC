@@ -9,12 +9,13 @@ class DatabaseMysqlController extends DatabaseController
     private $pdo;
 
     public function __construct(
-        string $db_name,
+        string $db_name = 'blog',
         string $db_user = 'root',
-        string $db_pass = 'root',
-        string $db_host = 'localhost',
+        string $db_pass = 'blog',
+        string $db_host = 'blog.mysql',
         string $db_char = 'UTF8'
-    ) {
+    ) {            
+
         $this->db_name = $db_name;
         $this->db_user = $db_user;
         $this->db_pass = $db_pass;
@@ -24,10 +25,10 @@ class DatabaseMysqlController extends DatabaseController
 
     public function getPDO()
     {
+
         if (is_null($this->pdo)) {
             $pdo = new PDO(
-                "mysql:host=" . $this->db_host .
-                    ";dbname=" . $this->db_name,
+                "mysql:host=".$this->db_host.";dbname=".$this->db_name,
                 $this->db_user,
                 $this->db_pass
             );

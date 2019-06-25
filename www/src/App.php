@@ -33,8 +33,8 @@ class App
             $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
             $whoops->register();
         }
+        //$numpage=0;
         $numPage = URLController::getPositiveInt('page');
-
         if ($numPage !== null) {
             // url /categories?page=1&parm2=pomme
             if ($numPage == 1) {

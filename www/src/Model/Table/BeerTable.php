@@ -2,21 +2,27 @@
 namespace App\Model\Table;
 
 use Core\Model\Table;
-use App\Model\Entity\PostEntity;
+use App\Model\Entity\BeerEntity;
 
-class PostTable extends Table
+class BeerTable extends Table
 {
-
     public function countById(?int $id = null)
     {
         if ($id) {
-            return $this->query("SELECT COUNT(*) as nbrow FROM {$this->table} as p
-            JOIN post_category as pc ON pc.post_id = p.id
-            WHERE pc.category_id = {$id}", null, true);
+            return $this->query("SELECT COUNT(*) as nbrow FROM {$this->table}
+            WHERE id = {$id}", null, true);
         } else {
             return $this->query("SELECT COUNT(id) as nbrow FROM {$this->table}", null, true, null);
         }
     }
+
+    public function allInIdByLimit(int $limit, int $offset, int $id)
+    {
+
+        $beer = $this->query("SELECT * FROM {$this->table} WHERE id = {$id}
+            LIMIT {$limit}  OFFSET {$offset}");
+        return $beer;
+        }
 
     public function allByLimit(int $limit, int $offset)
     {
@@ -27,11 +33,10 @@ class PostTable extends Table
         }, $beers);
 
         $beerById = [];
-        foreach ($beer as $beer) {
+        foreach ($beers as $beer) {
             $beerById[$beer->getId()] = $beer;
         }
         return $beerById;
     }
-
 
 }

@@ -1,7 +1,8 @@
 <?php
 require_once '/var/www/vendor/autoload.php';
 require_once 'donnees.php';
-$pdo = new PDO('mysql:host=blog.mysql;dbname=blog', 'userblog', 'blogpwd');
+$pdo = new PDO('mysql:host=blog.mysql; dbname=blog',
+                'userblog', 'blogpwd');
 
 //creation tables
 echo "[";

@@ -20,7 +20,6 @@ class PostController extends Controller
         );
 
         $postById = $paginatedQuery->getItems();
-
         $title = 'Mon Super MEGA blog';
         $this->render(
             'post/all',
@@ -31,11 +30,11 @@ class PostController extends Controller
                 
             ]
         );
+
     }
 
     public function show(string $slug, int $id) :void
     {
-
         $post = $this->post->find($id);
         if (!$post) {
             throw new \Exception('Aucun article ne correspond à cet ID');

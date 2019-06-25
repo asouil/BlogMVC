@@ -1,15 +1,14 @@
 <article class="col-3 mb-4 d-flex align-items-stretch">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">{{ beer.title }}</h4>
-            <img class="card-text" src="{{ beer.img | raw }}" width="100" height="300"></img>
-            <p class="card-text">{{ beer.excerpt(150) | raw }}</p>
-            
+            <h5 class="card-title">{{ beer.name }}</h5>
+            <p class="card-text">{{ beer.getExcerpt(100) | raw }}</p>
             <a class="card-link" href="{{ beer.url }}">Lire plus</a>
 
         </div>
+        <ul class="list-group list-group-flush ">
+        </ul>
         <div class="card-footer text-muted">
-            {{ beer.price }}
         </div>
     </div>
 </article>
