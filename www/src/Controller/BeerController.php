@@ -13,7 +13,6 @@ class BeerController extends Controller
     }
     public function all()
     {
-
         $paginatedQuery = new PaginatedQueryAppController(
             $this->beer,
             $this->generateUrl('beer')

@@ -14,9 +14,33 @@ class UsersController extends Controller
 
     public function all()
     {
+        
         $paginatedQuery = new PaginatedQueryAppController(
             $this->users,
-            $this->generateUrl('users')
+            $this->generateUrl('users', ['inscription', 'connexion'])
+        );
+        
+        $users = ['inscription', 'connexion'];
+        $title = "Inscription";
+        
+        //on va voir pour définir sur quelle page on envoi notre utilisateur avant de le diriger sur la page...
+        // là je me renseigne sur les variables qu'on peut envoyer à twig
+
+
+
+
+
+
+
+
+
+        $this->render(
+            "user/all",
+            [
+                "title" => $title,
+                "users" => $users,
+                "paginate" => $paginatedQuery->getNavHTML()
+            ]
         );
     }
 

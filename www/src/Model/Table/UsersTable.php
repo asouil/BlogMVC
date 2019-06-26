@@ -4,18 +4,17 @@ use Core\Model\Table;
 
 class UsersTable extends Table
 {
+    
 
-    function userConnect($mail, $password, $isConnect=false) :?boolean
+    public function userConnect($mail, $password, $isConnect=false) :?boolean
     {
         $sql = "SELECT * FROM users WHERE `mail`= ?";
         $pdo = getPDO();
             $statement = $pdo->prepare($sql);
             $statement->execute([htmlspecialchars($mail)]);
             $user = $statement->fetch();
-            if(	$user && 
-                password_verify(
-                htmlspecialchars($password), $user['password']
-            ) && $user['verify']){
+        if(	$user && 
+            password_verify(htmlspecialchars($password), $user['password']) && $user['verify']){
                     if($isConnect){
                         return true;
                         //exit();
@@ -26,7 +25,7 @@ class UsersTable extends Table
                     unset($user['password']);
                     $_SESSION['auth'] = $user;
                     //connecté
-                    header('location: index.php?p=profil');
+                    //header('location: index.php?p=profil');
                     exit();
             }else{
                 if($isConnect){
@@ -62,16 +61,7 @@ class UsersTable extends Table
         return $_SESSION["auth"];
     }
 
-    function rand_pwd($nb_car = 10, $chaine ='azertyuiopqsdfghjklmwxcvbn0123456789') {
-        $nb_lettre = strlen($chaine) -1;
-        $generation = '';
-        for($i=0; $i < $nb_car; $i++) {
-            $pos = mt_rand(0, $nb_lettre);
-            $car = $chaine[$pos];
-            $generation .= $car;
-        }
-        return $generation;
-    }
+
 
     function login($user, $password, ?string $token=null){
         $pdo = getPDO();

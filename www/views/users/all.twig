@@ -1,8 +1,8 @@
-<h1>{{ user.page }} </h1>
+<h1>{{ users.page }} </h1>
 
-<form method="POST" name="{{ page }}" action="">
+<form method="POST" name="{{ users.page }}" action="">
 
-{% if page == 'login' %}
+{% if users.page == 'login' %}
 	
 	{{ users.input("mail", votre courriel, email) }}
 	{{ users.input("password", "votre mot de passe","", "password") }}
