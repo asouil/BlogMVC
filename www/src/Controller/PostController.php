@@ -16,7 +16,7 @@ class PostController extends Controller
     {
         $paginatedQuery = new PaginatedQueryAppController(
             $this->post,
-            $this->generateUrl('home')
+            $this->generateUrl('blog')
         );
 
         $postById = $paginatedQuery->getItems();

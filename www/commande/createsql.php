@@ -79,6 +79,7 @@ $pdo->exec('TRUNCATE TABLE post_category');
 $pdo->exec('TRUNCATE TABLE post');
 $pdo->exec('TRUNCATE TABLE users');
 $pdo->exec('TRUNCATE TABLE category');
+$pdo->exec('TRUNCATE TABLE beer');
 $pdo->exec('SET FOREIGN_KEY_CHECKS = 1');
 echo "||||||||||||";
 $faker = Faker\Factory::create('fr_FR');
