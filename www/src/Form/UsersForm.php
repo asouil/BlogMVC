@@ -50,7 +50,7 @@ use Core\Controller\Helpers\InjectHTML;
 				input("phone", "votre numéro de portable",$user["phone"], "tel").
 				"votre courriel : ".$user["mail"].
 				input("robot", "","", "hidden").
-				input("id_user", "",$user["id_user"], "hidden").
+				input("id", "",$user["id"], "hidden").
 				"<button type=\"submit\">Envoyez</button>".
 				'</form><hr />';
 

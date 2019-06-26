@@ -5,42 +5,42 @@ use Core\Model\Table;
 class OrderTable extends Table
 {
     
-function CalculPrice(){
+	function CalculPrice(){
 
-    $sql = "SELECT * FROM `beer`";
-	$pdo = getDB($dbuser, $dbpassword, $dbhost,$dbname);
-	$statement = $pdo->prepare($sql);
-	$statement->execute(); 
+		$sql = "SELECT * FROM `beer`";
+		$pdo = getDB($dbuser, $dbpassword, $dbhost,$dbname);
+		$statement = $pdo->prepare($sql);
+		$statement->execute(); 
 
-	$beerArray = $statement->fetchAll();
+		$beerArray = $statement->fetchAll();
 
-	$beerTotal = [];
-	foreach ($beerArray as $key => $beer) {
-		$beerTotal[$beer['id']]= $beer;
-	}
-
-	$priceTTC = 0;
-	foreach($_POST['qty'] as $key => $valueQty) { //on boucle sur le tableau $_POST["qty"]
-		if($valueQty > 0) {
-			$price = $beerTotal[$key]['price']; 
-			$qty[$key] = ['qty' => $valueQty, "price"=>$price];
-			$priceTTC += $valueQty * $price * $tva;
+		$beerTotal = [];
+		foreach ($beerArray as $key => $beer) {
+			$beerTotal[$beer['id']]= $beer;
 		}
-    }
-    $serialCommande = serialize($qty); //On convertit le tableau $qty en String pour 												l'envoyer en bdd plus tard.
 
-	$orders = [":id_user"=>(int)$user['id_user'], ":ids_product"=>$serialCommande, ":priceTTC"=>$priceTTC];
+		$priceTTC = 0;
+		foreach($_POST['qty'] as $key => $valueQty) { //on boucle sur le tableau $_POST["qty"]
+			if($valueQty > 0) {
+				$price = $beerTotal[$key]['price']; 
+				$qty[$key] = ['qty' => $valueQty, "price"=>$price];
+				$priceTTC += $valueQty * $price * $tva;
+			}
+		}
+		$serialCommande = serialize($qty); //On convertit le tableau $qty en String pour l'utiliser												l'envoyer en bdd plus tard.
 
-	$sql = "INSERT INTO `orders` (`id_user`,`ids_product`,`priceTTC`) VALUES (:id_user, :ids_product, :priceTTC)";
+		$orders = [":id_user"=>(int)$user['id_user'], ":ids_product"=>$serialCommande, ":priceTTC"=>$priceTTC];
 
-	$statement = $pdo->prepare($sql);
-	$statement->execute($orders);
+		$sql = "INSERT INTO `orders` (`id_user`,`ids_product`,`priceTTC`) VALUES (:id_user, :ids_product, :priceTTC)";
 
-	$id = $pdo->lastInsertId(); //On recupère l'id de la dernière insertion en bdd
+		$statement = $pdo->prepare($sql);
+		$statement->execute($orders);
 
-	header('location: '.uri("confirmationDeCommande.php?id=".$id));
-	exit();
-}
+		$id = $pdo->lastInsertId(); //On recupère l'id de la dernière insertion en bdd
+
+		header('location: '.uri("confirmationDeCommande.php?id=".$id));
+		exit();
+	}
 	function confirm($id, ?string $order=null){
 		$pdo = getPDO();
 		if($order){
@@ -59,5 +59,14 @@ function CalculPrice(){
 			}
 			return unserialize($order['ids_product']); //Rétablis le tableau à sa forme originale
 		}
+	}
+
+	function affichebeer(){
+		$sql = "SELECT * FROM `beer`";
+		$pdo = getPDO();
+		$statement = $pdo->prepare($sql);
+		$statement->execute(); 
+
+		$beerArray = $statement->fetchAll();
 	}
 }

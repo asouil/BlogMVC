@@ -11,7 +11,6 @@ class UsersController extends Controller
         $this->loadModel('users');
         //$this->loadModel('order');
     }
-
     public function all()
     {
         
@@ -20,52 +19,46 @@ class UsersController extends Controller
             $this->generateUrl('users')
         );
 
-        //on va voir pour définir sur quelle page on envoi notre utilisateur avant de le diriger sur la page...
-        // là je me renseigne sur les variables qu'on peut envoyer à twig
-        if($users){
-            foreach($users as $user){
-                if($user) {
-                    $sqlparts = []; //:Array
-                    $fields = []; //:Array
-                    foreach($_POST as $key => $userInfo) {
-                        if($key != 'robot' && $key != 'id_user') {
-                            //On push "$key = ?" dans array $sqlparts
-                            $sqlparts[] = $key.' = ?';
-                            //On push la valeur de $userInfo dans $fields
-                            $fields[] = $userInfo;
-                        }
-                    }
-                    //On push l'id de l'utilisateur en dernier
-                    $fields[] = $_POST['id_user'];
-                    //On convertit le tableau $sqlparts en String en séparant ses cases par des virgules ',' 
-                    $sqlparts = implode(',', $sqlparts);
-                    //UPDATE users SET lastname = ?,firstname = ?,address = ?,zipCode = ?,city = ?,country = ?,phone = ? WHERE id_user = ?
-                    $sql = "UPDATE users SET ".$sqlparts.' WHERE id_user = ?';
-                    $req = $pdo->prepare($sql);
-                    $req->execute($fields);
-                }
-            }   
+                
+            $title = "Profil";
+            $this->render(
+                "users/all",
+                [
+                    "title" => $title,
+                    "paginate" => $paginatedQuery->getNavHTML()
+                ]
+            );
+        
+    }
+    public function login()
+    {
+        
+        $paginatedQuery = new PaginatedQueryAppController(
+            $this->users,
+            $this->generateUrl('users')
+        );
+
                 
             $title = "Connexion";
             $this->render(
-                "user/login",
+                "users/login",
                 [
                     "title" => $title,
                     "paginate" => $paginatedQuery->getNavHTML()
                 ]
             );
-        }
         
-        else {
+    }
+
+    public function register(){
+
             $title = "Inscription";
             $this->render(
-                "user/register",
+                "users/register",
                 [
                     "title" => $title,
-                    "paginate" => $paginatedQuery->getNavHTML()
-                ]
-            );
-        }
+                ]);
+        
     }
 
     public function show(){

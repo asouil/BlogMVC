@@ -1,16 +1,12 @@
-
 {% extends "layout/default.twig" %}
-
-<h1 class="titreduhaut">Nos Produits</h1>
-
 
 {% block title %}{{ title }}{% endblock %}
 
 
 {% block content %}
 <section class="row">
-    {% for beer in beers %}
-    {{  include("beer/card.twig") }}
+    {% for user in users %}
+    {{  include("user/card.twig") }}
     {% endfor %}
 </section>
 {{ paginate | raw }}

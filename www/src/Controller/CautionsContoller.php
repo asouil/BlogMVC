@@ -7,17 +7,13 @@ use App\Controller\PaginatedQueryAppController;
 class CautionsController extends Controller
 {
 
-    public function all()
+    public function mentions()
     {
-
         $title = "Mentions Légales";
 
         $this->render(
             "cautions/mentions",
-            [
-                "title" => $title,
-            ]
+            [   "title" => $title  ]
         );
     }
-
 }

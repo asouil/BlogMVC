@@ -1,13 +1,5 @@
-<?php 
-require_once('includes/function.php');
-$user = userOnly();
 
-$sql = "SELECT * FROM `beer`";
-$pdo = getDB($dbuser, $dbpassword, $dbhost,$dbname);
-$statement = $pdo->prepare($sql);
-$statement->execute(); 
 
-$beerArray = $statement->fetchAll();
 
 
 include 'includes/header.php'; 

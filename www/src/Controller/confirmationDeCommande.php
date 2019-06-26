@@ -8,8 +8,9 @@
 	$id = (int)$_GET['id']; //On "CAST"(convertit) $_GET['id'] en Integer
 
 	$order=confirm($id);
-	if(!$order || $order['id_user'] != $user["id_user"]) { //On vérifie l'id de l'utilisateur
-		header('location: '.uri("profil.php"));				//Et l'existence de la commande
+	if(!$order || $order['id_user'] != $user["id"]) { 
+		//On vérifie l'id de l'utilisateur Et l'existence de la commande
+		header('location: '.uri("profil.php"));			
 		exit();
 	}
 	$lines=confirm($id, $order);

@@ -58,7 +58,7 @@ $etape = $pdo->exec("CREATE TABLE orders(
             )");
 echo "|&&|";
 $etape = $pdo->exec("CREATE TABLE users(
-        id_user INT(11) NOT NULL AUTO_INCREMENT,
+        id INT(11) NOT NULL AUTO_INCREMENT,
         lastname varchar(255) NOT NULL,
         firstname varchar(255) NOT NULL,
         address varchar(255) NOT NULL,
@@ -70,7 +70,7 @@ $etape = $pdo->exec("CREATE TABLE users(
         password varchar(255) NOT NULL,
         verify boolean,
         token varchar(12),
-        PRIMARY KEY(id_user)
+        PRIMARY KEY(id)
         )");
 
 //vidage table

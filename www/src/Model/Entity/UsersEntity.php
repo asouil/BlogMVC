@@ -7,7 +7,7 @@ use Core\Controller\Helpers\TextController;
 
 class UsersEntity extends Entity
 {
-    private $id_user;
+    private $id;
     private $lastname;
     private $firstname;
     private $address;
