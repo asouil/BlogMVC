@@ -1,0 +1,27 @@
+<h1>{{ user.page }} </h1>
+
+<form method="POST" name="{{ page }}" action="">
+
+{% if page == 'login' %}
+	
+	{{ users.input("mail", votre courriel, email) }}
+	{{ users.input("password", "votre mot de passe","", "password") }}
+
+{% if page == 'register' %} 
+	{{ users.input("mail", votre courriel, email) }}
+	{{ users.input("mail", votre courriel, email) }}
+	{{ users.input("mailVerify", "vérification de votre courriel", "email") }}
+	{{ users.input("lastname", "votre nom","") }}
+	{{ users.input("firstname", "votre prénom","") }}
+	{{ users.input("address", "votre adresse","") }}
+	{{ users.input("zipCode", "votre code postal","") }}
+	{{ users.input("city", "votre ville","") }}
+	{{ users.input("country", "votre pays","") }}
+	{{ users.input("phone", "votre numéro de portable","", "tel") }}
+	{{ users.input("password", "votre mot de passe","", "password") }}
+	{{ users.input("passwordVerify", "confirmez votre mot de passe","", "password") }}
+
+{% fi %}
+	<button type="submit">Envoyez</button>
+</form>
+<a href="{{ url.p=reset }}">Mot de passe oublié</a>

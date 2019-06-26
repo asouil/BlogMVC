@@ -8,13 +8,9 @@ use Core\Controller\Helpers\TextController;
 class BeerEntity extends Entity
 {
     private $id;
-
     private $title;
-
     private $content;
-
     private $price;
-
     private $img;
 
     /**

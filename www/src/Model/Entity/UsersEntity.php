@@ -5,7 +5,7 @@ use Core\Model\Entity;
 
 use Core\Controller\Helpers\TextController;
 
-class UserEntity extends Entity
+class UsersEntity extends Entity
 {
     private $id_user;
 
@@ -41,6 +41,9 @@ class UserEntity extends Entity
     {
         return $this->firstname;
     }
+    /**
+     * Get the value of address
+     */
     public function getAddress()
     {
         return $this->address;
@@ -74,18 +77,12 @@ class UserEntity extends Entity
         return $this->token;
     }
 
-    public function getExcerpt(int $length): string
-    {
-        return nl2br(htmlentities(TextController::excerpt($this->getContent(), $length)));
-    }
-
     public function getUrl(): string
     {
         return \App\App::getInstance()
             ->getRouter()
-            ->url('user', [
-                "" => $this->getFirstName(),
-                "" => $this->getLastName()
+            ->url('users', [
+                $this->getToken()
             ]);
     }
 }

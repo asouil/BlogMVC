@@ -1,9 +1,12 @@
 <?php
-namespace App;
+namespace App\Model\Table;
+use Core\Model\Table;
 
-class UserTable{
+class UsersTable extends Table
+{
 
-    function userConnect($mail, $password, $isConnect=false){//:boolean|void
+    function userConnect($mail, $password, $isConnect=false) :?boolean
+    {
         $sql = "SELECT * FROM users WHERE `mail`= ?";
         $pdo = getPDO();
             $statement = $pdo->prepare($sql);

@@ -9,10 +9,11 @@ $app::load();
 
 $app->getRouter($basePath)
     ->get('/',  'Beer#all', 'beer')
+    ->get('/users', 'Users#all', 'users')
     ->get('/Blog', 'Post#all', 'home')
     ->get('/categories', 'Category#all', 'categories')
     ->get('/category/[*:slug]-[i:id]', 'Category#show', 'category')
     ->get('/article/[*:slug]-[i:id]', 'Post#show', 'post')
     ->get('/test', 'Twig#index', 'test')
-    ->get('/order', 'order#all', 'commande')
+    ->get('/order', 'order#all', 'order')
     ->run();

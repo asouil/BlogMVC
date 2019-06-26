@@ -1,7 +1,8 @@
 <?php
-namespace App;
+namespace App\Model\Table;
+use Core\Model\Table;
 
-class CommandeTable 
+class OrderTable extends Table
 {
     
 function CalculPrice(){
