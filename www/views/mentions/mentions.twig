@@ -1,0 +1,12 @@
+{% extends "layout/default.twig" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <section class="row">
+        {{  include("mentions/card.twig") }}
+    </section>
+    {{ paginate | raw }}
+{% endblock %}
+
+<!--Ce site est destiné uniquement à but d'appretissage -->

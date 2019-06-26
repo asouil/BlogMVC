@@ -26,7 +26,7 @@
                 <li class="nav-item">
                     <ul class="navbar-expand-lg dropdown-toggle-split"><a class="nav-link" href="/order">Boutique</a>
                         <li class="nav-item">
-                            <a class="nav-link" href="/userorder">Commandes</a>
+                            <a class="nav-link" href="/order/user">Commandes</a>
                         </li>
                     </ul>
                 </li>
@@ -49,7 +49,7 @@
                         </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/cautions">Mentions Légales</a>
+                    <a class="nav-link" href="/mentions">Mentions Légales</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
@@ -60,7 +60,7 @@
     </nav>
     <section class="bg-light mb-2 mt-3 p-5" style="min-height:100vh">
         <header class="jumbotron  mb-5">
-            <h1 class="text-center display-4">{% block title %}Mon site{% endblock %}</h1>
+            <h1 class="text-center display-4">{% block title %}Mon site de bières{% endblock %}</h1>
         </header>
         {% block content %}
         {% endblock %}
