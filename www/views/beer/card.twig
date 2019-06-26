@@ -2,7 +2,7 @@
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">{{ beer.title }}</h4>
-            <img class="card-text" src="{{ beer.img | raw }}" width="100" height="300"></img>
+            <div class="card-img colonne-centree"><img class="card-txt colonne-centree" src="{{ beer.img | raw }}" width="100" height="300" alt="{{ beer.title }}"></img></div>
             <p class="card-text">{{ beer.excerpt(150) | raw }}</p>
             
             <a class="card-link" href="{{ beer.url }}">Lire plus</a>

@@ -45,7 +45,7 @@ class UsersTable extends Table
     * verifie que l'utilisateur est connecté
     * @return array|void
     */
-    function userOnly($verify=false){//:array|void|boolean
+    function userin($verify=false){//:array|void|boolean
         if (session_status() != PHP_SESSION_ACTIVE){
             session_start();
         }
@@ -55,8 +55,8 @@ class UsersTable extends Table
                 return false;
             //exit();
             }
-            header('location: login.php');
-            exit();
+            //header('location: login.php');
+            //exit();
         }
         return $_SESSION["auth"];
     }
