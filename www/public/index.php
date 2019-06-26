@@ -16,4 +16,5 @@ $app->getRouter($basePath)
     ->get('/article/[*:slug]-[i:id]', 'Post#show', 'post')
     ->get('/test', 'Twig#index', 'test')
     ->get('/order', 'order#all', 'order')
+    ->get('/cautions', 'mentions.php', 'mentions' )
     ->run();

@@ -19,20 +19,20 @@ class OrderController extends Controller
             $this->generateUrl('order')
         );
 
-        $categories = $paginatedQuery->getItems();
+        $order = $paginatedQuery->getItems();
         $title = "Commandes";
 
         $this->render(
             "order/all",
             [
                 "title" => $title,
-                "categories" => $categories,
+                "order" => $order,
                 "paginate" => $paginatedQuery->getNavHTML()
             ]
         );
     }
 
-    public function show(string $slug, int $id)
+    public function show(string $price, int $id)
     {
         $order = $this->order->find($id);
 
@@ -40,14 +40,14 @@ class OrderController extends Controller
             throw new Exception('Aucune categorie ne correspond à cet ID');
         }
 
-        if ($order->getSlug() !== $slug) {
-            $url = $this->generateUrl('order', ['id' => $id, 'slug' => $order->getSlug()]);
+        if ($order->getPrice() !== $price) {
+            $url = $this->generateUrl('order', ['id' => $id, 'price' => $order->getPrice()]);
             http_response_code(301);
             header('Location: ' . $url);
             exit();
         }
 
-        $title = 'categorie : ' . $order->getName();
+        $title = 'Commande : ' . $order->getId();
 
         $uri = $this->generateUrl("order", ["id" => $order->getId(), "slug" => $order->getSlug()]);
 

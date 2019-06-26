@@ -1,11 +1,11 @@
 <article class="col-3 mb-4 d-flex align-items-stretch">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">{{ beer.title }}</h4>
-            <div class="card-img colonne-centree"><img class="card-txt colonne-centree" src="{{ beer.img | raw }}" width="100" height="300" alt="{{ beer.title }}"></img></div>
-            <p class="card-text">{{ beer.excerpt(150) | raw }}</p>
+            <h3 class="card-title text-center">{{ beer.title }}</h3>
+            <div class="card-img text-center"><img class="card-txt " src="{{ beer.img | raw }}" width="100" height="300" alt="{{ beer.title }}"></img></div>
+            <p class="card-text text-justify">{{ beer.excerpt(200) | raw }}</p>
             
-            <a class="card-link" href="{{ beer.url }}">Lire plus</a>
+            <a class="card-link" href="#">Redirection vers commande?</a>
 
         </div>
         <div class="card-footer text-muted">

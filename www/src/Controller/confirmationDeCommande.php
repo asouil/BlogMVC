@@ -1,5 +1,4 @@
 <?php
-	require_once('includes/function.php');
 	$user = userOnly();
 
 	if(!isset($_GET['id'])) {
@@ -61,7 +60,6 @@
 			<small>Si vous ne réglez pas sous 10 jours, le prix de votre commande sera majoré.(25%/jour de retard)</small>
 		</p>
 </section>
-<?php
-	include 'includes/footer.php';
+
 
 

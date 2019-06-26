@@ -38,7 +38,7 @@ $etape = $pdo->exec("CREATE TABLE post_category(
                 ON DELETE CASCADE
                 ON UPDATE RESTRICT
         )");
-echo "||&";
+echo "!!";
 $etape = $pdo->exec("CREATE TABLE beer(
             id INT(11) NOT NULL AUTO_INCREMENT,
             title varchar(255) NOT NULL,
@@ -53,6 +53,7 @@ $etape = $pdo->exec("CREATE TABLE orders(
             id_user INT(11) NOT NULL,
             ids_product longtext NOT NULL,
             priceTTC float NOT NULL,
+            date_order datetime NOT NULL,
             PRIMARY KEY(id)
             )");
 echo "|&&|";
@@ -67,6 +68,8 @@ $etape = $pdo->exec("CREATE TABLE users(
         phone varchar(255) NOT NULL,
         mail varchar(255) NOT NULL,
         password varchar(255) NOT NULL,
+        verify boolean,
+        token varchar(12),
         PRIMARY KEY(id_user)
         )");
 

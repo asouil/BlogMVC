@@ -130,28 +130,29 @@ class UsersController extends Controller
             throw new \Exception('Aucun utilisateur ne correspond à cet ID');
         }
         if($user->getConnect()){
-                echo 	'<h1>Profil</h1>';
+            echo 	'<h1>Profil</h1>';
                 //tableau des commandes
-                foreach ($orders as $order) {
-                    echo '<a href="'.uri("confirmationDeCommande.php?id=").$order["id"].'">commande n°'.$order["id"].'- '.number_format($order["priceTTC"], 2, ',' ,'.').'€ </a><br />';
-                }
-        if ($user->getId() !== $user[$id]) {
-            $url = $this->generateUrl('user', [
-                    'id' => $id, 
-                    'user' => $user->getToken()
-                ]);
-            http_response_code(301);
-            header('Location: ' . $url);
-            exit();
+            foreach ($orders as $order) {
+                echo 'Vos commandes'.$this->order->getId();
+            }
+            if ($user->getId() !== $user[$id]) {
+                $url = $this->generateUrl('user', [
+                        'id' => $id, 
+                        'user' => $user->getToken()
+                    ]);
+                http_response_code(301);
+                header('Location: ' . $url);
+                exit();
+            }
+            $this->render(
+                "user/profil",
+                [
+                    "title" => $title,
+                    "user" => $user,
+                    "paginate" => $paginatedQuery->getNavHTML()
+                ]
+            );
         }
-        $this->render(
-            "user/profil",
-            [
-                "title" => $title,
-                "user" => $user,
-                "paginate" => $paginatedQuery->getNavHTML()
-            ]
-        );
     }
 }
 
