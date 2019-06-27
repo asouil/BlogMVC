@@ -18,6 +18,6 @@ $app->getRouter($basePath)
     ->get('/article/[*:slug]-[i:id]', 'Post#show', 'post')
     ->get('/categories', 'Category#all', 'categories')
     ->get('/category/[*:slug]-[i:id]', 'Category#show', 'category')
-    ->get('/mentions', 'mentions', 'mentions' )
+    ->get('/mentions', 'mentions#mentions', 'mentions' )
     ->get('/test', 'Twig#index', 'test')
     ->run();

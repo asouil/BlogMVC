@@ -10,6 +10,6 @@ class MentionsController extends Controller
     {
         $title = "Mentions Légales";
 
-        $this->render("mentions", [   "title" => $title  ]);
+        $this->render("mentions/mentions", [   "title" => $title  ]);
     }
 }
