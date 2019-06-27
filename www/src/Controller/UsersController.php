@@ -9,7 +9,7 @@ class UsersController extends Controller
     public function __construct()
     {
         $this->loadModel('users');
-        //$this->loadModel('order');
+        $this->loadModel('order');
     }
     public function all()
     {

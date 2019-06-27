@@ -11,12 +11,12 @@
 
 Les sections ont été modifiées, les mentions légales ne veulent pas s'afficher pour le moment. 
 Pages fonctionnelles :
-        * home
-        * utilisateur (à ajuster au profil quand ceux-ci seront accessible en BDD -- en cours de tests d'insertion en BDD)
-        * inscription (le formulaire est disponible sans les fonctions pour l'insert dans la BDD)
-        * connexion (idem)
-        * Blog
-        * Categories (et les liens qui vont avec)
+* home
+* utilisateur (à ajuster au profil quand ceux-ci seront accessible en BDD -- en cours de tests d'insertion en BDD)
+* inscription (le formulaire est disponible sans les fonctions pour l'insert dans la BDD (soucis de page appelée par le MVC))
+* connexion (idem)
+* Blog
+* Categories (et les liens qui vont avec)
 
 A faire : 
 * la boutique et l'accès à la page de commande

@@ -2,20 +2,20 @@
 namespace App\Model\Table;
 use Core\Model\Table;
 
-class OrderTable extends Table
+class OrdersTable extends Table
 {
     
-	function CalculPrice(){
+	function calcPrice(){
 
 		$sql = "SELECT * FROM `beer`";
-		$pdo = getDB($dbuser, $dbpassword, $dbhost,$dbname);
+		$pdo = getPDO();
 		$statement = $pdo->prepare($sql);
 		$statement->execute(); 
 
-		$beerArray = $statement->fetchAll();
+		$beers = $statement->fetchAll();
 
 		$beerTotal = [];
-		foreach ($beerArray as $key => $beer) {
+		foreach ($beers as $key => $beer) {
 			$beerTotal[$beer['id']]= $beer;
 		}
 

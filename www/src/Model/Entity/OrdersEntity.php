@@ -3,7 +3,7 @@ namespace App\Model\Entity;
 
 use Core\Model\Entity;
 
-class CommandeEntity extends Entity
+class OrdersEntity extends Entity
 {
 
     private $id;

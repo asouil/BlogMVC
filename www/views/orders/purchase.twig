@@ -1,0 +1,68 @@
+{% extends "layout/sitebiere.twig" %}
+
+{% block content %}
+	<form method="POST" action="/">
+		<div class="form_row">
+			<div class="form">
+				<label>NOM</label>
+				<input type="text" name="lastname" value="{{ users.lastname }}" required/>
+			</div>
+			<div class="form">
+				<label>PRENOM</label>
+				<input type="text" name="firstname" value="{{ users.firstname }}" required/>
+			</div>
+		</div>
+		<div class="form">
+			<label>ADRESSE</label>
+			<input type="text" name="address" value="{{ users.address }}" required/>
+		</div>
+		<div class="form_row">
+			<div class="form">
+				<label>Code Postal</label>
+				<input type="text" name="zipCode" value="{{ users.zipcode }}" required/>
+			</div>
+			<div class="form">
+				<label>VILLE</label>
+				<input type="text" name="city" value="{{ users.city }}" required/>
+			</div>
+		</div>
+		<div class="form">
+			<label>PAYS</label>
+			<input type="text" name="country" value="{{ users.country }}" required/>
+		</div>
+		<div class="form_row">
+			<div class="form">
+				<label>TEL</label>
+				<input type="tel" name="phone" value="{{ users.phone }}" required/>
+			</div>
+			<div class="form">
+				<label>MAIL</label>
+				<input type="text" name="mail" value="{{ users.mail }}" disabled/>
+			</div>
+		</div>
+		<table>
+			<thead>
+				<tr>
+					<th>Choix</th>
+					<th>Prix TTC</th>
+					<th>Quantité</th>
+				</tr>
+			</thead>
+			<tbody>
+            {% for beer in beers %}
+                <tr>
+                    <td>{{ beer.title }}</td>
+                    <td id="{{ beer.id }}">{{ beer.getPrice() }}</td>
+                    <td><input type="number" min="0" name="qty[{{ beer.id }}]" value="0" 
+						oninput="calcPrice(this, {{ beer.id }}, {{ beer.price }});" /></td>
+                </tr>
+            {% endfor %}
+			</tbody>
+		</table>
+<div class="centrer">
+    <div><button type="submit">Commander</button></div>
+</div>
+	</form>
+
+{{ paginate | raw }}
+{% endblock content %}
