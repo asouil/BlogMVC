@@ -1,6 +1,6 @@
 <?php 
 use Core\Controller\Helpers\InjectHTML;
-
+// pour le moment, les formulaires ont été fait à la main pour rentrer les données utilisateurs
 ?>
 
 <h1><?= $page ?></h1>

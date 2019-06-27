@@ -9,7 +9,7 @@ class UsersController extends Controller
     public function __construct()
     {
         $this->loadModel('users');
-       // $this->loadModel('orders');
+        $this->loadModel('orders'); 
     }
     public function all()
     {
@@ -38,13 +38,12 @@ class UsersController extends Controller
             $this->generateUrl('users')
         );
 
-                
             $title = "Connexion";
             $this->render(
                 "users/login",
                 [
                     "title" => $title,
-                    "paginate" => $paginatedQuery->getNavHTML()
+                    "paginate" => $paginatedQuery->getNavHTML(),
                 ]
             );
         
