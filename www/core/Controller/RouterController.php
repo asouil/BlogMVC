@@ -13,6 +13,11 @@ class RouterController
         $this->viewPath = $viewPath;
         $this->router = new \AltoRouter();
     }
+    public function post(string $uri, string $file, string $name): self
+    {
+        $this->router->map('POST', $uri, $file, $name);
+        return $this;
+    }
 
     public function get(string $uri, string $file, string $name): self
     {
@@ -46,4 +51,8 @@ class RouterController
             exit();
         }
     }
+
+
+
+
 }

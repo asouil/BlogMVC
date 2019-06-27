@@ -9,7 +9,7 @@ class UsersController extends Controller
     public function __construct()
     {
         $this->loadModel('users');
-        $this->loadModel('order');
+       // $this->loadModel('orders');
     }
     public function all()
     {
@@ -70,7 +70,7 @@ class UsersController extends Controller
             echo 	'<h1>Profil</h1>';
                 //tableau des commandes
             foreach ($orders as $order) {
-                echo 'Vos commandes'.$this->order->getId();
+                echo 'Vos commandes'.$this->orders->getId();
             }
             if ($user->getId() !== $user[$id]) {
                 $url = $this->generateUrl('user', [

@@ -19,7 +19,6 @@ class OrdersController extends Controller
             $this->generateUrl('orders')
         );
         $title = "Commandes";
-        if(!$paginatedQuery->getItems()){
             
             $this->render(
                 "orders/all",
@@ -29,25 +28,12 @@ class OrdersController extends Controller
                 ]
             );
 
-
-        }
-        else {
-            $order = $paginatedQuery->getItems();
-            $this->render(
-                "orders/all",
-                [
-                    "title" => $title,
-                    "orders" => $order,
-                    "paginate" => $paginatedQuery->getNavHTML()
-                ]
-            );
-        }
     }
 
     public function show(string $price, int $id)
     {
-        $order = $this->order->find($id);
-
+        $order = $this->orders->find($id);
+        
         if (!$order) {
             throw new Exception('Aucune categorie ne correspond à cet ID');
         }
@@ -61,7 +47,40 @@ class OrdersController extends Controller
 
         $title = 'Commande : ' . $order->getId();
 
-        $uri = $this->generateUrl("order", ["id" => $order->getId()]);
+        $uri = $this->generateUrl("orders", ["id" => $order->getId()]);
 
     }
+
+    public function purchase(){
+        $order = $this->orders->find($id);
+        $paginatedQuery = new PaginatedQueryAppController(
+            $this->orders,
+            $this->generateUrl('orders')
+        );
+        if($order){
+            if ($order->getPrice() !== $price) {
+                $url = $this->generateUrl('orders', ['id' => $id, 'price' => $order->getPrice()]);
+                http_response_code(301);
+                header('Location: ' . $url);
+                exit();
+            }
+            $title = 'Commande : ' . $order->getId();
+            $uri = $this->generateUrl("orders", ["id" => $order->getId()]);
+            
+        }
+        else {
+            $uri = $this->generateUrl("orders");
+            $title = 'Commande : ' . $order;
+        }
+          
+        $this->render(
+            "orders/all",
+            [
+                "title" => $title,
+                "paginate" => $paginatedQuery->getNavHTML()
+            ]
+        );
+
+    }
+    
 }
