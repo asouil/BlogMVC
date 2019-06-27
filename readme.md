@@ -12,7 +12,7 @@
 Les sections ont été modifiées, les mentions légales ne veulent pas s'afficher pour le moment. 
 Pages fonctionnelles :
         * home
-        * utilisateur (à ajuster au profil quand ceux-ci seront accessible en BDD)
+        * utilisateur (à ajuster au profil quand ceux-ci seront accessible en BDD -- en cours de tests d'insertion en BDD)
         * inscription (le formulaire est disponible sans les fonctions pour l'insert dans la BDD)
         * connexion (idem)
         * Blog
@@ -21,4 +21,4 @@ Pages fonctionnelles :
 A faire : 
 * la boutique et l'accès à la page de commande
 * la validation des commandes ??
-* l'affichage des mentions légales 
+* l'affichage des mentions légales

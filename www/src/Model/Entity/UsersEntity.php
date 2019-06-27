@@ -68,18 +68,19 @@ class UsersEntity extends Entity
     }
     public function getMail()
     {
-        return $this->mail;
+        return htmlspecialchars($this->mail);
     }
     /**
      * Get the value of created_at
      * @return \DateTime
      */
-    public function getToken()
-    {
-        return $this->token;
+
+    protected function getPassword(){
+        //encryption avant envoi : password_hash ( string $password , PASSWORD_BCRYPT) : string
+        return password_hash($this->password, PASSWORD_BCRYPT);
     }
 
-    public function setToken($nb_car = 10, $chaine ='azertyuiopqsdfghjklmwxcvbn0123456789') {
+    public function setToken($nb_car = 12, $chaine ='azertyuiopqsdfghjklmwxcvbn0123456789') {
         $nb_lettre = strlen($chaine) -1;
         $generation = '';
         for($i=0; $i < $nb_car; $i++) {
@@ -88,6 +89,10 @@ class UsersEntity extends Entity
             $generation .= $car;
         }
         return $this->token=$generation;
+    }
+    protected function getToken()
+    {
+        return $this->token;
     }
 
     protected function getVerify(){
@@ -119,5 +124,18 @@ class UsersEntity extends Entity
             ->url('users', [
                 $this->getToken()
             ]);
+    }
+    public function createUser(){
+        $this->lastname=$_POST['name'];
+        $this->firstname=$_POST['firstname'];
+        $this->address=$_POST['address'];
+        $this->zipCode=$_POST['zipCode'];
+        $this->city=$_POST['city'];
+        $this->country=$_POST['country'];
+        $this->phone=$_POST['phone'];
+        $this->mail=$_POST['email'];
+        $this->_password=$_POST['password'];
+        $this->token=setToken();
+        return Table\create($this);
     }
 }

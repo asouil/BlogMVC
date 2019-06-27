@@ -5,7 +5,7 @@
         <div>
             <h2>Inscription</h2>
             </header>
-            <form action="" method="Post">
+            <form action="\" method="Post" onsubmit="{{ users.createUser() }}">
                 <input type="text" name="name" placeholder="Nom" required>
                 <input type="text" name="firstname" placeholder="Prénom">
                 <input type="email" name="email" placeholder="E-mail" required>
@@ -15,7 +15,7 @@
                 <input type="text" name="phone" placeholder="Téléphone">
                 <input type="text" name="city" placeholder="Ville">
                 <input type="text" name="country" placeholder="Pays">
-                <button type="submit">S'inscrire</button>
+                <button type="submit" >S'inscrire</button>
             </form>
         </div>
     </section>

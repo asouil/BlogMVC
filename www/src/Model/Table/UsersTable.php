@@ -73,4 +73,27 @@ class UsersTable extends Table
         //return connection;
     }
 
+    function create(UsersEntity $inser){
+        $pdo=getPDO();
+        $sql = "SELECT * FROM users WHERE `mail`= ?";
+        $statement = $pdo->prepare($sql);
+        $statement->execute([$inser->getMail()]);
+        $user = $statement->fetch();
+        if(!$user){
+            $req=$pdo->exec('INSERT INTO users SET
+                    mail={$inser->mailgetMail()},
+                    firstname={$inser->getFirstname()},
+                    lastname={$inser->getLastName()},
+                    address={$inser->getAddress()},
+                    zipCode={$inser->getZipCode()},
+                    city={$inser->getCity()},
+                    country={$inser->getCountry()},
+                    phone={$inser->getPhone()},
+                    password={$inser->getPassword()}
+                    token={$inser->getToken()');
+            //envoi du token par mail avec MVC?
+        }
+        
+    }
+
 }
