@@ -1,16 +1,8 @@
-<article class="col-3 mb-4 d-flex align-items-stretch">
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">{{ user.name }}</h5>
- <!-- appel de formulaire ? -->
-        </div>
-        <ul class="list-group list-group-flush ">
-            {% for order in orders %}
-            <li> {{ order.price }} 
-            </li>
-            {% endfor %}
-        </ul>
-        <div class="card-footer text-muted">
-        </div>
-    </div>
-</article>
+
+            <td><a href='/purchaseconfirm/{{ order.id }}'>Commande n°{{ order.id }}</a></td>
+            <td>{{ order.price }} €</td>
+                <form action="/profil" method="POST">
+                    <input type="hidden" name="id" value="{{order.id}}" />
+                    <td><input type="submit" name="delete" value="Supprimer" /></td>
+                </form>
+            </tr>
