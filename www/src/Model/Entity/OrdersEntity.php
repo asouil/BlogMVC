@@ -8,8 +8,11 @@ class OrdersEntity extends Entity
 
     private $id;
     private $id_user;
-    private $priceHT;
+    private $priceTTC;
+    private $date_order;
     private $ids_product;
+
+
 
     public function getId(): int
     {
@@ -21,13 +24,16 @@ class OrdersEntity extends Entity
         return $this->id_user;
     }
 
-    public function getPriceHT(): string
+    public function getPriceTTC(): string
     {
-        return $this->priceHT;
+        return $this->priceTTC;
     }
     public function getPrice(): string
     {
-        return $this->priceHT*1.2;
+        return $this->priceTTC/1.2;
+    }
+    public function getDate(){
+        return $this->date_order;
     }
     public function getIdsProduct(){
         return unserialiaze($this->ids_product);
@@ -40,5 +46,20 @@ class OrdersEntity extends Entity
                 "id" => $this->getId(),
                 "price" => $this->getPrice()
             ]);
+    }
+
+
+    public function setIdUser($id_user){
+        $this->id_user=$id_user;
+    }
+
+    public function setPrice($price){
+        $this->price=$price;
+    }
+    public function setIdsProduct($prod){
+        $this->ids_product=$prod;
+    }
+    public function setDate(){
+        $this->date_order=new \Date();
     }
 }
