@@ -21,30 +21,34 @@
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/">Site Bière <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown-toggle-split">
+                    <ul class="navbar-expand-lg dropdown-toggle-split"><a class="nav-link" href="/orders">Boutique</a>
+                        <li class="nav-item dropdown-item">
+                            <a class="nav-link" href="/orders/purchase">Commandes</a>
+                        </li>
+                    </ul>
                 </li>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link" href="/blog">Blog</a>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="/categories">Catégories</a>
-                        </li>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/mentions">Mentions Légales</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/users">Profil</a>
+                    <a class="nav-link" href="/users">Utilisateur</a>
                         <li class="nav-item">
                             <a class="nav-link" href="/users/register">Inscription</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/users/login">Connexion</a>
                         </li>
+                    </ul>
                 </li>
-                </ul>
+                <ul class="navbar-nav mr-auto">
+                <li class="nav-item " data-toggle="">
+                    <a class="nav-link" href="/blog">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/mentions">Mentions Légales</a>
+                </li>
+            </ul>
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="text" placeholder="Recherche">
                 <button class="btn btn-secondary my-2 my-sm-0" type="submit">Chercher</button>
@@ -53,7 +57,7 @@
     </nav>
     <section class="bg-light mb-2 mt-3 p-5" style="min-height:100vh">
         <header class="jumbotron  mb-5">
-            <h1 class="text-center display-4">{% block title %}Mon petit Blog{% endblock %}</h1>
+            <h1 class="text-center display-4">{% block title %}Mon site de bières{% endblock %}</h1>
         </header>
         {% block content %}
         {% endblock %}
