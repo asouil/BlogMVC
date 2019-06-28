@@ -8,7 +8,7 @@ $app->setStartTime();
 $app::load();
 
 $app->getRouter($basePath)
-    ->get('/',  'Beer#all', 'beer')
+    ->get('/', 'Beer#all', 'beer')
     ->get('/users', 'Users#all', 'users')
     ->get('/users/login', 'Users#login', 'login')
     ->get('/users/register', 'Users#register', 'register')
@@ -18,6 +18,6 @@ $app->getRouter($basePath)
     ->get('/article/[*:slug]-[i:id]', 'Post#show', 'post')
     ->get('/categories', 'Category#all', 'categories')
     ->get('/category/[*:slug]-[i:id]', 'Category#show', 'category')
-    ->get('/mentions', 'mentions#mentions', 'mentions' )
+    ->get('/mentions', 'mentions#mentions', 'mentions')
     ->get('/test', 'Twig#index', 'test')
     ->run();

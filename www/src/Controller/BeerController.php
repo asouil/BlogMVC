@@ -60,11 +60,11 @@ class BeerController extends Controller
 
         $this->render(
             "beer/show",
-            [   
+            [
                 "title" => $title,
                 "img" =>$img,
                 "content" => $content,
-                "price" => $price, 
+                "price" => $price,
                 "paginate" => $paginatedQuery->getNavHTML()
             ]
         );

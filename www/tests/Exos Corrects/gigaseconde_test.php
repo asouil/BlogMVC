@@ -1,6 +1,7 @@
 <?php
 
 use \PHPUnit\Framework\TestCase;
+
 require "gigaseconde.php";
 
 class GigasecondTest extends TestCase

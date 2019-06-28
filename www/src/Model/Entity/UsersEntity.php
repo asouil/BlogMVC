@@ -75,15 +75,17 @@ class UsersEntity extends Entity
      * @return \DateTime
      */
 
-    protected function getPassword(){
+    protected function getPassword()
+    {
         //encryption avant envoi : password_hash ( string $password , PASSWORD_BCRYPT) : string
         return password_hash($this->password, PASSWORD_BCRYPT);
     }
 
-    public function setToken($nb_car = 12, $chaine ='azertyuiopqsdfghjklmwxcvbn0123456789') {
+    public function setToken($nb_car = 12, $chaine = 'azertyuiopqsdfghjklmwxcvbn0123456789')
+    {
         $nb_lettre = strlen($chaine) -1;
         $generation = '';
-        for($i=0; $i < $nb_car; $i++) {
+        for ($i=0; $i < $nb_car; $i++) {
             $pos = mt_rand(0, $nb_lettre);
             $car = $chaine[$pos];
             $generation .= $car;
@@ -95,24 +97,27 @@ class UsersEntity extends Entity
         return $this->token;
     }
 
-    protected function getVerify(){
+    protected function getVerify()
+    {
         return $this->verify;
     }
-    public function setVerify($token){
-        if($this->getToken()==$token){
+    public function setVerify($token)
+    {
+        if ($this->getToken()==$token) {
             return $verify=true;
         }
         return $verify=false;
     }
 
-    public function getConnect(){
+    public function getConnect()
+    {
         return $this->connect;
     }
-    public function setConnect(){
-        if($this->verify){
+    public function setConnect()
+    {
+        if ($this->verify) {
             return $this->connect=true;
-        }
-        else{
+        } else {
             return $this->connect=true;
         }
     }
@@ -125,7 +130,8 @@ class UsersEntity extends Entity
                 $this->getToken()
             ]);
     }
-    public function createUser(){
+    public function createUser()
+    {
         $this->lastname=$_POST['name'];
         $this->firstname=$_POST['firstname'];
         $this->address=$_POST['address'];

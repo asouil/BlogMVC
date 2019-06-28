@@ -32,10 +32,12 @@ class OrdersEntity extends Entity
     {
         return $this->priceTTC/1.2;
     }
-    public function getDate(){
+    public function getDate()
+    {
         return $this->date_order;
     }
-    public function getIdsProduct(){
+    public function getIdsProduct()
+    {
         return unserialiaze($this->ids_product);
     }
     public function getUrl(): string
@@ -49,17 +51,21 @@ class OrdersEntity extends Entity
     }
 
 
-    public function setIdUser($id_user){
+    public function setIdUser($id_user)
+    {
         $this->id_user=$id_user;
     }
 
-    public function setPrice($price){
+    public function setPrice($price)
+    {
         $this->price=$price;
     }
-    public function setIdsProduct($prod){
+    public function setIdsProduct($prod)
+    {
         $this->ids_product=$prod;
     }
-    public function setDate(){
+    public function setDate()
+    {
         $this->date_order=new \Date();
     }
 }

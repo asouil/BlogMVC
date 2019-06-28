@@ -9,7 +9,7 @@ class UsersController extends Controller
     public function __construct()
     {
         $this->loadModel('users');
-        $this->loadModel('orders'); 
+        $this->loadModel('orders');
     }
     public function all()
     {
@@ -28,7 +28,6 @@ class UsersController extends Controller
                     "paginate" => $paginatedQuery->getNavHTML()
                 ]
             );
-        
     }
     public function login()
     {
@@ -46,34 +45,35 @@ class UsersController extends Controller
                     "paginate" => $paginatedQuery->getNavHTML(),
                 ]
             );
-        
     }
 
-    public function register(){
+    public function register()
+    {
 
             $title = "Inscription";
             $this->render(
                 "users/register",
                 [
                     "title" => $title,
-                ]);
-        
+                ]
+            );
     }
 
-    public function show(){
+    public function show()
+    {
         $user = $this->user->find($id);
         if (!$user) {
             throw new \Exception('Aucun utilisateur ne correspond à cet ID');
         }
-        if($user->getConnect()){
-            echo 	'<h1>Profil</h1>';
+        if ($user->getConnect()) {
+            echo    '<h1>Profil</h1>';
                 //tableau des commandes
             foreach ($orders as $order) {
                 echo 'Vos commandes'.$this->orders->getId();
             }
             if ($user->getId() !== $user[$id]) {
                 $url = $this->generateUrl('user', [
-                        'id' => $id, 
+                        'id' => $id,
                         'user' => $user->getToken()
                     ]);
                 http_response_code(301);
@@ -91,4 +91,3 @@ class UsersController extends Controller
         }
     }
 }
-

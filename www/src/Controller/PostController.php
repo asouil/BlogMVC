@@ -30,7 +30,6 @@ class PostController extends Controller
                 
             ]
         );
-
     }
 
     public function show(string $slug, int $id) :void
@@ -42,7 +41,7 @@ class PostController extends Controller
 
         if ($post->getSlug() !== $slug) {
             $url = $this->generateUrl('post', [
-                    'id' => $id, 
+                    'id' => $id,
                     'slug' => $post->getSlug()
                 ]);
             http_response_code(301);

@@ -22,7 +22,7 @@ class BeerTable extends Table
         $beer = $this->query("SELECT * FROM {$this->table} WHERE id = {$id}
             LIMIT {$limit}  OFFSET {$offset}");
         return $beer;
-        }
+    }
 
     public function allByLimit(int $limit, int $offset)
     {
@@ -38,5 +38,4 @@ class BeerTable extends Table
         }
         return $beerById;
     }
-
 }

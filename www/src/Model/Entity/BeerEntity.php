@@ -50,7 +50,7 @@ class BeerEntity extends Entity
     public function getPrice()
     {
         $price= $this->price;
-        $price=number_format($price, 2, ',','.');
+        $price=number_format($price, 2, ',', '.');
         return $price." €";
     }
 

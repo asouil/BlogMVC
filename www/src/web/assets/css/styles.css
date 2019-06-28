@@ -1,14 +1,14 @@
 @charset "UTF-8";
 body {
   /* HEADER */
-  /*FIN HEADER 
+  /*FIN HEADER
   DEBUT HOME */
   /* FIN HOME
   PAGE BOUTIQUES */
   /*FIN BOUTIQUE
-  	PURCHASE_ORDER */
+    PURCHASE_ORDER */
   /* FIN PURCHASE_ORDER
-  	CONFIRMATION DE COMMANDE */
+    CONFIRMATION DE COMMANDE */
   /*FOOTER */ }
   body .titreduhaut {
     text-align: center; }
