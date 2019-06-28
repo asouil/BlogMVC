@@ -6,7 +6,7 @@
 {% block content %}
 <section class="row">
     {% for beer in beers %}
-    {{  include("beer/card.twig") }}
+        {{  include("beer/card.twig") }}
     {% endfor %}
 </section>
 {{ paginate | raw }}
