@@ -1,1 +1,69 @@
 {% extends "layout/default.twig" %}
+
+{% block content %}
+
+<form method="POST" name="{{ title }}" action="/profil">
+    <div class="form-group">
+        <label for="lastname">Votre nom</label>
+        <input id="lastname" type="text" name="lastname" value="{{ users.lastname }}" required></div>
+    <div class="form-group">
+        <label for="firstname">Votre prénom</label>
+        <input id="firstname" type="text" name="firstname" value="{{ users.firstname }}" required></div>
+    <div class="form-group">
+        <label for="address">Votre adresse</label>
+        <input id="address" type="text" name="address" value="{{ users.address }}" required></div>
+    <div class="form-group">
+        <label for="zipCode">Votre code postal</label>
+        <input id="zipCode" type="text" name="zipCode" value="{{ users.zipCode }}" required></div>
+    <div class="form-group">
+        <label for="city">Votre ville</label>
+        <input id="city" type="text" name="city" value="{{ users.city }}" required></div>
+    <div class="form-group">
+        <label for="country">Votre pays</label>
+        <input id="country" type="text" name="country" value="{{ users.country }}" required></div>
+    <div class="form-group">
+        <label for="phone">Votre numéro de portable</label>
+        <input id="phone" type="tel" name="phone" value="{{ users.phone }}" required></div>
+
+    <div class="centrer">
+        <div><button type="submit">Envoyer</button></div>
+    </div>
+</form>
+
+<form method="POST" name="{{ title }}" action="/profil">
+    <div class="form-group">
+        <label for="passwordOld">Ancien mot de passe</label>
+        <input id="passwordOld" type="password" name="passwordOld" value="" required></div>
+    <div class="form-group">
+        <label for="password">Nouveau mot de passe</label>
+        <input id="password" type="password" name="password" value="" required></div>
+    <div class="form-group">
+        <label for="passwordVerify">Confirmez votre nouveau mot de passe</label>
+        <input id="passwordVerify" type="password" name="passwordVerify" value="" required></div>
+    <div class="centrer">
+        <div><button type="submit">Envoyer</button></div>
+    </div>
+</form>
+<section id="commandes">
+	<table>
+		<thead>
+			<tr>
+                <th scope='row'>Commande</th>
+				<th>Total TTC</th>
+                <th></th>
+			</tr>
+		</thead>
+		<tbody>
+    {% for order in orders %}
+            <td><a href='/purchaseconfirm/{{ order.id }}'>Commande n°{{ order.id }}</a></td>
+            <td>{{ order.price }} €</td>
+                <form action="/profil" method="POST">
+                    <input type="hidden" name="id" value="{{order.id}}" />
+                    <td><input type="submit" name="delete" value="Supprimer" /></td>
+                </form>
+            </tr>
+    {% endfor %}
+		</tbody>
+    </table>
+</section>
+{% endblock content %}
