@@ -6,7 +6,7 @@
             <header>
             <h2>Identification</h2>
         </header>
-        <form action="/login" method="POST" onsubmit="{{ users.userConnect() }}">
+        <form action="/users/login" method="POST" onsubmit="{{ users.userConnect() }}">
             <input type="mail" name="mail" placeholder="Mail" />
             <input type="password" name="password" placeholder="Mot de passe" />
             <button type="submit">Connexion</button>

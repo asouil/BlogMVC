@@ -49,12 +49,13 @@ class UsersController extends Controller
 
     public function register()
     {
-
             $title = "Inscription";
+            $methode="";
             $this->render(
                 "users/register",
                 [
                     "title" => $title,
+                    "methode" => $methode
                 ]
             );
     }

@@ -76,8 +76,9 @@ class OrdersController extends Controller
         );
     }
 
-    public function purchase($envoi = null)
+    public function purchase()
     {
+        $methode="tableau";
         $paginatedQuery = new PaginatedQueryAppController(
             $this->orders,
             $this->generateUrl('orders')
@@ -88,6 +89,7 @@ class OrdersController extends Controller
                 "orders/all",
                 [
                     "title" => $title,
+                    "methode" => $methode,
                     "paginate" => $paginatedQuery->getNavHTML()
                 ]
             );
