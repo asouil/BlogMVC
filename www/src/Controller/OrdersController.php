@@ -15,6 +15,7 @@ class OrdersController extends Controller
     }
     public function all()
     {
+        
         if ($user!==null) {
             $order = new OrdersEntity();
                 $order->setIdUser($user->getId());
@@ -28,18 +29,28 @@ class OrdersController extends Controller
                     "priceTTC"  => $order->getPrice(),
                     "date"      => $order->getDate()
                 ];
-                $result = $this->orders->insert($attrib);
-                exit();
+                $beers = $this->orders->insert($attrib);
+                $this->render(
+                    "orders/all",
+                    [
+                    "title" => $title,
+                    "beer" =>$beers,
+                    "paginate" => $paginatedQuery->getNavHTML()
+                    ]
+                );
+
         } else {
             $title = 'Commander : ' . $order;
             $paginatedQuery = new PaginatedQueryAppController(
                 $this->orders,
                 $this->generateUrl('orders')
             );
+            $beers=$this->beer->allByLimit(10,0);
             $this->render(
-                "orders/all",
+                "orders/show",
                 [
                 "title" => $title,
+                "beers" =>$beers,
                 "paginate" => $paginatedQuery->getNavHTML()
                 ]
             );
@@ -68,7 +79,7 @@ class OrdersController extends Controller
             $title = 'Commande n° : ' . $order->getId();
         }
         $this->render(
-            "orders/all",
+            "orders/purchase_order",
             [
                 "title" => $title,
                 "paginate" => $paginatedQuery->getNavHTML()
@@ -78,6 +89,10 @@ class OrdersController extends Controller
 
     public function purchase()
     {
+        
+
+
+        
         $methode="tableau";
         $paginatedQuery = new PaginatedQueryAppController(
             $this->orders,
@@ -86,7 +101,7 @@ class OrdersController extends Controller
         $title = "Commande :";
             
             $this->render(
-                "orders/all",
+                "orders/purchase",
                 [
                     "title" => $title,
                     "methode" => $methode,

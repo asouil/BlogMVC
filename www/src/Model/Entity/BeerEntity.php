@@ -10,6 +10,7 @@ class BeerEntity extends Entity
     private $id;
     private $title;
     private $content;
+    private $priceHT;
     private $price;
     private $img;
 
@@ -43,15 +44,23 @@ class BeerEntity extends Entity
     {
         return $this->content;
     }
-
+ /**
+     * Get the price
+     */
+    public function getPriceHT()
+    {
+        $price= $this->price;
+        $price=number_format($price, 2, ',', '.');
+        return $price." €";
+    }
     /**
      * Get the price
      */
     public function getPrice()
     {
-        $price= $this->price;
+        $price= $this->price*1.2;
         $price=number_format($price, 2, ',', '.');
-        return $price." €";
+        return $price;
     }
 
     public function getExcerpt(int $length): string

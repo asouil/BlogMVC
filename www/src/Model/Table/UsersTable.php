@@ -77,26 +77,52 @@ class UsersTable extends Table
         //return connection;
     }
 
-    function create(UsersEntity $inser)
+    function create()
     {
-        $pdo=getPDO();
-        $sql = "SELECT * FROM users WHERE `mail`= ?";
-        $statement = $pdo->prepare($sql);
-        $statement->execute([$inser->getMail()]);
-        $user = $statement->fetch();
-        if (!$user) {
-            $req=$pdo->exec('INSERT INTO users SET
-                    mail={$inser->mailgetMail()},
-                    firstname={$inser->getFirstname()},
-                    lastname={$inser->getLastName()},
-                    address={$inser->getAddress()},
-                    zipCode={$inser->getZipCode()},
-                    city={$inser->getCity()},
-                    country={$inser->getCountry()},
-                    phone={$inser->getPhone()},
-                    password={$inser->getPassword()}
-                    token={$inser->getToken()');
-            //envoi du token par mail avec MVC?
+        $user = query("SELECT * FROM users WHERE `mail`= ?",
+            [
+                htmlspecialchars($_POST["mail"])
+            ]
+        );
+			if(!$user){
+				$password = password_hash(htmlspecialchars($_POST["password"]), PASSWORD_BCRYPT);
+				$token = setToken();
+				$sql = "INSERT INTO `users` (`lastname`, `firstname`, `address`, `zipCode`, `city`, `country`, `phone`, `mail`, `password`, `token`) VALUES (
+				 :lastname,				 
+				 :firstname,
+				 :address,
+				 :zipCode, 
+				 :city,
+				 :country,
+				 :phone,
+				 :mail,
+				 :password,
+				 :token)
+				 ";
+				$statement = $pdo->prepare($sql);
+				$result = $statement->execute([
+					":lastname"		=> htmlspecialchars($_POST["lastname"]),
+					":firstname"	=> htmlspecialchars($_POST["firstname"]),
+					":address"		=> htmlspecialchars($_POST["address"]),
+					":zipCode"		=> htmlspecialchars($_POST["zipCode"]),
+					":city"			=> htmlspecialchars($_POST["city"]),
+					":country"		=> htmlspecialchars($_POST["country"]),
+					":phone"		=> htmlspecialchars($_POST["phone"]),
+					":mail"			=> htmlspecialchars($_POST["mail"]),
+					":password"		=> $password,
+					":token"		=> $token
+				]);
+				if($result){
+					$message =["html" => '<a href="http://bierecorrection.localhost/index.php?p=login&token='.$token.'">lala.com</a>',
+					'text' => 'un texte'];
+					envoiMail('Euuuhhhhh', $_POST['mail'], $message);
+					header('location: index.php?p=login');
+				}else{
+					die("pas ok");
+					//TODO : signaler erreur
+				}
+			}else{//fin verif user existe
+				userConnect($_POST["mail"], $_POST["password"]);
+			}
         }
     }
-}

@@ -1,17 +1,22 @@
 
 {% extends "layout/defaultBeer.twig" %}
 
-<h1 class="titreduhaut">Nos Produits</h1>
-
-
 {% block title %}{{ title }}{% endblock %}
 
-
 {% block content %}
+<h1 class="titreduhaut">Nos Produits</h1>
 <section class="row">
-    {% for beer in beers %}
-    {{  include("beer/card.twig") }}
-    {% endfor %}
+    <table class="table table-striped">
+        <tr><th scope="col"> Bière </th><th scope="col"> Prix TTC </th><th scope="col"> Quantité </th></tr>
+        {% for key, beer in beers %}
+            <tr><td>{{ beer.title }}</td><td id="PTTC_{{ beer.id }}">{{ beer.price }} €</td><td>
+            <input type="number" min="0" name="qty[{{ beer.id }}]" value="0" oninput="calcPrice(this, {{ key }},{{ beer.price|number_format(2, '.', ',') }})" /></td></tr>
+
+
+        {% endfor %}
+    </table>
+    <button>Valider</button>
+
 </section>
 {{ paginate | raw }}
 {% endblock %}

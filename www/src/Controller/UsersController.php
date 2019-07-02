@@ -49,15 +49,47 @@ class UsersController extends Controller
 
     public function register()
     {
+
             $title = "Inscription";
-            $methode="";
+            if(	isset($_POST["lastname"]) && !empty($_POST["lastname"]) &&
+                isset($_POST["firstname"]) && !empty($_POST["firstname"]) &&
+                isset($_POST["address"]) && !empty($_POST["address"]) &&
+                isset($_POST["zipCode"]) && !empty($_POST["zipCode"]) &&
+                isset($_POST["city"]) && !empty($_POST["city"]) &&
+                isset($_POST["country"]) && !empty($_POST["country"]) &&
+                isset($_POST["phone"]) && !empty($_POST["phone"]) &&
+                isset($_POST["mail"]) && !empty($_POST["mail"]) &&
+                isset($_POST["mailVerify"]) && !empty($_POST["mailVerify"]) &&
+                isset($_POST["password"]) && !empty($_POST["password"]) &&
+                isset($_POST["passwordVerify"]) && !empty($_POST["passwordVerify"])&&
+                isset($_POST["robot"]) && empty($_POST["robot"])//protection robot
+            ){
+		
+            if(
+                ( 	filter_var($_POST["mail"], FILTER_VALIDATE_EMAIL) && 
+                    $_POST["mail"] == $_POST["mailVerify"]
+                ) &&
+                ( $_POST["password"] == $_POST["passwordVerify"])
+            ){
+                $methode=UsersTable\create();
+                $this->render(
+                    "users/register",
+                    [
+                        "title" => $title,
+                        "methode" => $methode                    
+                    ]
+                );
+            }
+        }
+
+        else {
             $this->render(
                 "users/register",
                 [
-                    "title" => $title,
-                    "methode" => $methode
+                    "title" => $title                  
                 ]
             );
+        }
     }
 
     public function show()

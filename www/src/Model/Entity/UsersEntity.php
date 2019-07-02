@@ -130,18 +130,5 @@ class UsersEntity extends Entity
                 $this->getToken()
             ]);
     }
-    public function createUser()
-    {
-        $this->lastname=$_POST['name'];
-        $this->firstname=$_POST['firstname'];
-        $this->address=$_POST['address'];
-        $this->zipCode=$_POST['zipCode'];
-        $this->city=$_POST['city'];
-        $this->country=$_POST['country'];
-        $this->phone=$_POST['phone'];
-        $this->mail=$_POST['email'];
-        $this->_password=$_POST['password'];
-        $this->token=setToken();
-        return Table\create($this);
-    }
+
 }
